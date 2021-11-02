@@ -9,7 +9,7 @@ class ToDoItemController extends Controller
 {
     public function index()
     {
-        $todoitems = ToDoItem::latest();
+        $todoitems = ToDoItem::all();
         return view('todoitems.index', compact('todoitems'));
     }
 
@@ -29,11 +29,6 @@ class ToDoItemController extends Controller
         return redirect()->route('todoitems.index');
     }
 
-    public function show(ToDoItem $toDoItem)
-    {
-        return view('todoitems.show', compact('toDoItem'));
-    }
-
     public function edit(ToDoItem $toDoItem)
     {
         return view('todoitems.edit', compact('toDoItem'));
@@ -50,8 +45,10 @@ class ToDoItemController extends Controller
         return redirect()->route('todoitems.index');
     }
 
-    public function delete(ToDoItem $toDoItem)
+    public function destroy(ToDoItem $toDoItem)
     {
+        dd($toDoItem);
+        $toDoItem->delete();
         return redirect()->route('todoitems.index');
     }
 }
