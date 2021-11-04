@@ -29,26 +29,30 @@ class ToDoItemController extends Controller
         return redirect()->route('todoitems.index');
     }
 
-    public function edit(ToDoItem $toDoItem)
+    public function show(ToDoItem $todoitem)
     {
-        return view('todoitems.edit', compact('toDoItem'));
+        return view('todoitems.show', compact('todoitem'));
     }
 
-    public function update(Request $request, ToDoItem $toDoItem)
+    public function edit(ToDoItem $todoitem)
+    {
+        return view('todoitems.edit', compact('todoitem'));
+    }
+
+    public function update(Request $request, ToDoItem $todoitem)
     {
         $request->validate([
             'title' => ['required', 'max:255']
         ]);
 
-        $toDoItem->update($request->all());
+        $todoitem->update($request->all());
 
         return redirect()->route('todoitems.index');
     }
 
-    public function destroy(ToDoItem $toDoItem)
+    public function destroy(ToDoItem $todoitem)
     {
-        dd($toDoItem);
-        $toDoItem->delete();
+        $todoitem->delete();
         return redirect()->route('todoitems.index');
     }
 }

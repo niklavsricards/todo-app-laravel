@@ -15,7 +15,7 @@
                         <tr>
                             <th class="px-6 py-2 text-xs text-gray-500">Task</th>
                             <th class="px-6 py-2 text-xs text-gray-500">Edit</th>
-                            <th class="px-6 py-2 text-xs text-gray-500">Delete</th>
+                            <th class="px-6 py-2 text-xs text-gray-500">Done</th>
                         </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-300">
@@ -23,11 +23,11 @@
                                 <tr class="whitespace-nowrap">
                                     <td class="px-6 py-4"><div class="text-sm text-gray-900">{{ $todoitem->title }}</div></td>
                                     <td class="px-6 py-4">
-                                        <a href="{{ route('todoitems.update', $todoitem->id) }}"
+                                        <a href="{{ route('todoitems.edit', $todoitem) }}"
                                            class="px-4 py-1 text-sm text-black-600 bg-green-200 rounded-full">Edit</a>
                                     </td>
                                     <td class="px-6 py-4">
-                                        <form action="{{ route('todoitems.destroy', $todoitem->id) }}" method="post">
+                                        <form action="{{ route('todoitems.destroy', $todoitem) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
