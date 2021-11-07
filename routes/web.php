@@ -13,4 +13,8 @@ Route::get('/dashboard', function () {
 
 Route::resource('todoitems', ToDoItemController::class);
 
+Route::post('/todoitems/{todoitem}/complete', [ToDoItemController::class, 'complete'])
+    ->middleware('auth')
+    ->name('todoitems.complete');
+
 require __DIR__.'/auth.php';
