@@ -9,7 +9,7 @@ class ToDoItemController extends Controller
 {
     public function index()
     {
-        $todoitems = ToDoItem::all();
+        $todoitems = auth()->user()->todoitems()->get();
         return view('todoitems.index', compact('todoitems'));
     }
 
@@ -24,7 +24,12 @@ class ToDoItemController extends Controller
             'title' => ['required', 'max:255']
         ]);
 
-        ToDoItem::create($request->all());
+        $todoitem = (new ToDoItem([
+            'title' => $request->get('title'),
+        ]));
+
+        $todoitem->user()->associate(auth()->user());
+        $todoitem->save();
 
         return redirect()->route('todoitems.index');
     }
